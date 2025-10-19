@@ -1,2 +1,5 @@
-export { View, Text, TextInput, Button } from 'react-native';
-
+export { View } from 'react-native';
+// Barrel exports for UI components
+export { default as Button } from './Button';
+export { default as TextInput } from './TextInput';
+export { default as Text } from './Text';
