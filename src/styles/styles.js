@@ -1,77 +1,107 @@
 import { StyleSheet } from 'react-native';
 
-export default StyleSheet.create({
-  // Teacher Message
-  teacherBox: {
-    margin: 15,
-    padding: 15,
-    backgroundColor: '#eef',
-    borderRadius: 10,
+export const styles = StyleSheet.create({
+  //  Global Container
+  container: {
+    flexGrow: 1,
+    backgroundColor: '#f8f8f8',
+    padding: 20,
   },
+
+  section: {
+    marginBottom: 25,
+  },
+
+  //  About Me Section
+  aboutBox: {
+    backgroundColor: '#fff',
+    padding: 15,
+    borderRadius: 10,
+    elevation: 2,
+  },
+  aboutHeading: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    textAlign: 'center',
+  },
+  aboutText: {
+    fontSize: 16,
+    marginBottom: 5,
+  },
+
+  //  Teacher Message / Headings
   teacherHeading: {
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 8,
-  },
-  teacherText: {
-    fontSize: 16,
-    marginBottom: 10,
+    textAlign: 'center',
   },
 
-  // Tasbih Section
-  tasbihContainer: {
+  //  Search & Add Section
+  searchContainer: {
+    backgroundColor: '#fff',
+    padding: 15,
+    borderRadius: 10,
+    elevation: 2,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
     padding: 10,
+    marginBottom: 10,
+    borderRadius: 8,
+  },
+  resultText: {
+    fontSize: 16,
+    marginVertical: 4,
+  },
+
+  //  Tasbih Counter Section
+  tasbihContainer: {
+    marginTop: 20,
+    backgroundColor: '#fff',
+    padding: 15,
+    borderRadius: 10,
+    elevation: 2,
   },
   tasbihItem: {
-    backgroundColor: '#f4f4f4',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    borderWidth: 1,
+    borderColor: '#ccc',
     padding: 10,
     borderRadius: 8,
     marginBottom: 8,
   },
   tasbihText: {
-    fontSize: 18,
-    fontWeight: '600',
+    flex: 2,
+    fontSize: 16,
   },
   tasbihCount: {
-    fontSize: 22,
-    color: '#0077cc',
+    flex: 1,
+    fontSize: 16,
+    textAlign: 'center',
   },
   buttonRow: {
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 5,
   },
 
-  // Search & Add
-  searchContainer: {
+  //  FlatList-based Tasbih version
+  itemRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: '#fff',
     padding: 10,
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
+    marginBottom: 8,
     borderRadius: 8,
-    padding: 8,
-    marginBottom: 8,
+    elevation: 1,
   },
-  resultText: {
-    fontSize: 16,
-    color: '#333',
-  },
-  aboutBox: {
-    margin: 15,
-    padding: 15,
-    backgroundColor: '#f9f9f9',
-    borderRadius: 10,
-  },
-  aboutHeading: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 8,
-  },
-  aboutText: {
-    fontSize: 16,
-    marginBottom: 4,
-  },
+  itemName: { fontSize: 16, flex: 1 },
+  counter: { fontSize: 18, fontWeight: 'bold', marginHorizontal: 10 },
+  sectionTitle: { fontSize: 20, fontWeight: 'bold', marginBottom: 10 },
 });
-
-
