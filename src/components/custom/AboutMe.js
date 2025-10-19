@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text } from '../ui';
-import styles from '../../styles/styles';
+import { styles } from '../../style/styles'; 
 import student from '../../config/student';
 
 export default function AboutMe() {
@@ -15,8 +15,6 @@ export default function AboutMe() {
     </View>
   );
 }
-
-
 
 
 
