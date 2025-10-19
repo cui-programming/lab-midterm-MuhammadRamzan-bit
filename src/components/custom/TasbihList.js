@@ -1,14 +1,7 @@
 import React, { useState } from 'react';
-import { View, FlatList, Text } from 'react-native'; // You may switch Text to ui/Text later
-import { styles } from '../../styles/styles';
-import { initialAzkaar } from '../../data/azkaar';
+import { View, Text, Button } from '../ui';
+import styles from '../../style/styles';
 
-/**
- * Custom/TasbihList
- * Renders a FlatList of azkaar with their counts.
- * NOTE: Increment/Decrement buttons are intentionally NOT implemented.
- * Students will add + and - controls using UI/Button and update state accordingly.
- */
 export default function TasbihList() {
   const [tasbihList, setTasbihList] = useState([
     { phrase: 'SubhanAllah', count: 0 },
