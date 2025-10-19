@@ -104,4 +104,18 @@ export const styles = StyleSheet.create({
   itemName: { fontSize: 16, flex: 1 },
   counter: { fontSize: 18, fontWeight: 'bold', marginHorizontal: 10 },
   sectionTitle: { fontSize: 20, fontWeight: 'bold', marginBottom: 10 },
+
+  //  Button Styles
+  button: {
+    backgroundColor: '#64acbbff',
+    paddingVertical: 8,
+    paddingHorizontal: 15,
+    borderRadius: 8,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
 });
