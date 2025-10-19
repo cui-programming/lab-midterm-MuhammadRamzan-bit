@@ -10,26 +10,41 @@ import { initialAzkaar } from '../../data/azkaar';
  * Students will add + and - controls using UI/Button and update state accordingly.
  */
 export default function TasbihList() {
-  const [items, setItems] = useState(initialAzkaar);
+  const [tasbihList, setTasbihList] = useState([
+    { phrase: 'SubhanAllah', count: 0 },
+    { phrase: 'Alhamdulillah', count: 0 },
+    { phrase: 'Allahu Akbar', count: 0 },
+  ]);
 
-  // HINT ONLY (do not complete): you will need handlers like increment(id) / decrement(id)
+  const increment = (i) => {
+    setTasbihList(list =>
+      list.map((item, index) =>
+        index === i ? { ...item, count: item.count + 1 } : item
+      )
+    );
+  };
 
-  const renderItem = ({ item }) => (
-    <View style={styles.itemRow}>
-      <Text style={styles.itemName}>{item.phrase}</Text>
-      <Text style={styles.counter}>{item.count}</Text>
-      {/* TODO: Add increment/decrement buttons here using ui/Button */}
-    </View>
-  );
+  const decrement = (i) => {
+    setTasbihList(list =>
+      list.map((item, index) =>
+        index === i && item.count > 0 ? { ...item, count: item.count - 1 } : item
+      )
+    );
+  };
 
   return (
-    <View style={styles.section}>
-      <Text style={styles.sectionTitle}>Tasbih Counter</Text>
-      <FlatList
-        data={items}
-        keyExtractor={(it) => it.id}
-        renderItem={renderItem}
-      />
+    <View style={styles.tasbihContainer}>
+      <Text style={styles.teacherHeading}>Tasbih List</Text>
+      {tasbihList.map((item, i) => (
+        <View key={i} style={styles.tasbihItem}>
+          <Text style={styles.tasbihText}>{item.phrase}</Text>
+          <Text style={styles.tasbihCount}>{item.count}</Text>
+          <View style={styles.buttonRow}>
+            <Button title="+" onPress={() => increment(i)} />
+            <Button title="-" onPress={() => decrement(i)} />
+          </View>
+        </View>
+      ))}
     </View>
   );
 }
