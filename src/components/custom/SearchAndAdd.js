@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button } from '../ui';
-import styles from '../../style/styles';
+import { styles } from '../../style/styles'; 
 
 export default function SearchAndAdd() {
-  const [items, setItems] = useState(['SubhanAllah', 'Alhamdulillah', 'Allahu Akbar']);
+  const [items, setItems] = useState(['SubhanAllah', 'Alhamdulillah', 'Allahu Akbar', 'Lā ilāha illā Allāh']);
   const [search, setSearch] = useState('');
   const [newItem, setNewItem] = useState('');
 
