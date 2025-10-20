@@ -1,25 +1,20 @@
+
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button } from '../ui';
 import { styles } from '../../style/styles';
 
-export default function SearchAndAdd({ items, addTasbih }) {
+export default function SearchAndAdd({ onAdd }) {
   const [search, setSearch] = useState('');
   const [newItem, setNewItem] = useState('');
 
-  const filteredItems = items.filter((item) =>
-    item.phrase.toLowerCase().includes(search.toLowerCase())
-  );
+  const handleAdd = () => {
+    onAdd(newItem);
+    setNewItem('');
+  };
 
   return (
     <View style={styles.searchContainer}>
       <Text style={styles.teacherHeading}>Search & Add Tasbih</Text>
-
-      <TextInput
-        style={styles.input}
-        placeholder="Search..."
-        value={search}
-        onChangeText={setSearch}
-      />
 
       <TextInput
         style={styles.input}
@@ -28,13 +23,11 @@ export default function SearchAndAdd({ items, addTasbih }) {
         onChangeText={setNewItem}
       />
 
-      <Button
-        title="Add"
-        onPress={() => {
-          addTasbih(newItem);
-          setNewItem('');
-        }}
-      />
+      <Button title="Add" onPress={handleAdd} />
+
+      {search ? (
+        <Text style={styles.resultText}>Searching for: {search}</Text>
+      ) : null}
     </View>
   );
 }
