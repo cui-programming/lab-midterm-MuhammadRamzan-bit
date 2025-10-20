@@ -6,22 +6,18 @@ import AboutMe from './src/component/custom/AboutMe';
 import TeacherMessage from './src/component/custom/TeacherMessage';
 import TasbihList from './src/component/custom/TasbihList';
 import SearchAndAdd from './src/component/custom/SearchAndAdd';
-import { initialAzkaar } from './src/data/azkaar'; //  Imported azkaar data
+import { initialAzkaar } from './src/data/azkaar';
 
 export default function App() {
-  //  Shared tasbih state (used by both components)
   const [tasbihItems, setTasbihItems] = useState(initialAzkaar);
+  const [searchQuery, setSearchQuery] = useState('');
 
-  //  Increment tasbih count
   const increment = (id) => {
     setTasbihItems(items =>
-      items.map(it =>
-        it.id === id ? { ...it, count: it.count + 1 } : it
-      )
+      items.map(it => it.id === id ? { ...it, count: it.count + 1 } : it)
     );
   };
 
-  //  Decrement tasbih count
   const decrement = (id) => {
     setTasbihItems(items =>
       items.map(it =>
@@ -30,16 +26,25 @@ export default function App() {
     );
   };
 
-  //  Add new tasbih phrase
-  const addTasbih = (phrase) => {
-    if (!phrase.trim()) return alert('Invalid input!');
-    const exists = tasbihItems.some(it => it.phrase.toLowerCase() === phrase.toLowerCase());
-    if (exists) return alert('Already exists!');
-    setTasbihItems([
-      ...tasbihItems,
-      { id: Date.now().toString(), phrase: phrase.trim(), count: 0 }
-    ]);
+  const addTasbih = (newPhrase) => {
+    if (!newPhrase.trim()) return alert('Invalid input!');
+    if (tasbihItems.some(it => it.phrase.toLowerCase() === newPhrase.toLowerCase())) {
+      return alert('Already exists!');
+    }
+
+    const newItem = {
+      id: (tasbihItems.length + 1).toString(),
+      phrase: newPhrase,
+      count: 0,
+    };
+
+    setTasbihItems([...tasbihItems, newItem]);
   };
+
+  // Filter items by search
+  const filteredItems = tasbihItems.filter(it =>
+    it.phrase.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -52,15 +57,19 @@ export default function App() {
       </View>
 
       <View style={styles.section}>
-        <TasbihList
-          items={tasbihItems}
-          onIncrement={increment}
-          onDecrement={decrement}
+        <SearchAndAdd
+          onAdd={addTasbih}
+          search={searchQuery}
+          setSearch={setSearchQuery}
         />
       </View>
 
       <View style={styles.section}>
-        <SearchAndAdd onAdd={addTasbih} />
+        <TasbihList
+          items={filteredItems}
+          increment={increment}
+          decrement={decrement}
+        />
       </View>
     </ScrollView>
   );
