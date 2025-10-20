@@ -6,42 +6,39 @@ import AboutMe from './src/component/custom/AboutMe';
 import TeacherMessage from './src/component/custom/TeacherMessage';
 import TasbihList from './src/component/custom/TasbihList';
 import SearchAndAdd from './src/component/custom/SearchAndAdd';
+import { initialAzkaar } from './src/data/azkaar'; //  Imported azkaar data
 
 export default function App() {
-  //  Shared tasbih list
-  const [tasbihItems, setTasbihItems] = useState([
-    { id: 1, phrase: 'SubhanAllah', count: 0 },
-    { id: 2, phrase: 'Alhamdulillah', count: 0 },
-    { id: 3, phrase: 'Allahu Akbar', count: 0 },
-    { id: 4, phrase: 'Lā ilāha illā Allāh', count: 0 },
-  ]);
+  //  Shared tasbih state (used by both components)
+  const [tasbihItems, setTasbihItems] = useState(initialAzkaar);
 
-  // ➕ Add new phrase
-  const addTasbih = (newPhrase) => {
-    if (
-      newPhrase.trim() &&
-      !tasbihItems.some((item) => item.phrase.toLowerCase() === newPhrase.toLowerCase())
-    ) {
-      setTasbihItems([
-        ...tasbihItems,
-        { id: Date.now(), phrase: newPhrase.trim(), count: 0 },
-      ]);
-    } else {
-      alert('Already exists or invalid input!');
-    }
-  };
-
-  //  Increment &  Decrement functions
+  //  Increment tasbih count
   const increment = (id) => {
-    setTasbihItems((prev) =>
-      prev.map((it) => (it.id === id ? { ...it, count: it.count + 1 } : it))
+    setTasbihItems(items =>
+      items.map(it =>
+        it.id === id ? { ...it, count: it.count + 1 } : it
+      )
     );
   };
 
+  //  Decrement tasbih count
   const decrement = (id) => {
-    setTasbihItems((prev) =>
-      prev.map((it) => (it.id === id && it.count > 0 ? { ...it, count: it.count - 1 } : it))
+    setTasbihItems(items =>
+      items.map(it =>
+        it.id === id && it.count > 0 ? { ...it, count: it.count - 1 } : it
+      )
     );
+  };
+
+  //  Add new tasbih phrase
+  const addTasbih = (phrase) => {
+    if (!phrase.trim()) return alert('Invalid input!');
+    const exists = tasbihItems.some(it => it.phrase.toLowerCase() === phrase.toLowerCase());
+    if (exists) return alert('Already exists!');
+    setTasbihItems([
+      ...tasbihItems,
+      { id: Date.now().toString(), phrase: phrase.trim(), count: 0 }
+    ]);
   };
 
   return (
@@ -55,17 +52,15 @@ export default function App() {
       </View>
 
       <View style={styles.section}>
-        {/* Pass items + increment/decrement */}
         <TasbihList
           items={tasbihItems}
-          increment={increment}
-          decrement={decrement}
+          onIncrement={increment}
+          onDecrement={decrement}
         />
       </View>
 
       <View style={styles.section}>
-        {/*  Pass items + addTasbih */}
-        <SearchAndAdd items={tasbihItems} addTasbih={addTasbih} />
+        <SearchAndAdd onAdd={addTasbih} />
       </View>
     </ScrollView>
   );
