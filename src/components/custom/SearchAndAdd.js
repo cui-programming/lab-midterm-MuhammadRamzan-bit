@@ -1,10 +1,8 @@
-
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button } from '../ui';
-import { styles } from '../../style/styles';
+import { styles } from '../../style/styles'; 
 
-export default function SearchAndAdd({ onAdd }) {
-  const [search, setSearch] = useState('');
+export default function SearchAndAdd({ onAdd, search, setSearch }) {
   const [newItem, setNewItem] = useState('');
 
   const handleAdd = () => {
@@ -18,16 +16,19 @@ export default function SearchAndAdd({ onAdd }) {
 
       <TextInput
         style={styles.input}
+        placeholder="Search Tasbih..."
+        value={search}
+        onChangeText={setSearch}
+      />
+
+      <TextInput
+        style={styles.input}
         placeholder="Add new phrase"
         value={newItem}
         onChangeText={setNewItem}
       />
 
       <Button title="Add" onPress={handleAdd} />
-
-      {search ? (
-        <Text style={styles.resultText}>Searching for: {search}</Text>
-      ) : null}
     </View>
   );
 }
