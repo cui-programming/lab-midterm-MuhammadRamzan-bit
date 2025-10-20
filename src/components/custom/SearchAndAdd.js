@@ -1,23 +1,13 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button } from '../ui';
-import { styles } from '../../style/styles'; 
+import { styles } from '../../style/styles';
 
-export default function SearchAndAdd() {
-  const [items, setItems] = useState(['SubhanAllah', 'Alhamdulillah', 'Allahu Akbar', 'Lā ilāha illā Allāh']);
+export default function SearchAndAdd({ items, addTasbih }) {
   const [search, setSearch] = useState('');
   const [newItem, setNewItem] = useState('');
 
-  const handleAdd = () => {
-    if (newItem.trim() && !items.includes(newItem.trim())) {
-      setItems([...items, newItem.trim()]);
-      setNewItem('');
-    } else {
-      alert('Already exists or invalid input!');
-    }
-  };
-
-  const filteredItems = items.filter(item =>
-    item.toLowerCase().includes(search.toLowerCase())
+  const filteredItems = items.filter((item) =>
+    item.phrase.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
@@ -38,11 +28,13 @@ export default function SearchAndAdd() {
         onChangeText={setNewItem}
       />
 
-      <Button title="Add" onPress={handleAdd} />
-
-      {filteredItems.map((item, index) => (
-        <Text key={index} style={styles.resultText}>{item}</Text>
-      ))}
+      <Button
+        title="Add"
+        onPress={() => {
+          addTasbih(newItem);
+          setNewItem('');
+        }}
+      />
     </View>
   );
 }
