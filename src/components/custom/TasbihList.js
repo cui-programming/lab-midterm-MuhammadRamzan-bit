@@ -1,20 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 import { Text, Button } from '../ui';
 import { styles } from '../../style/styles';
-import { initialAzkaar } from '../../data/azkaar';
 
-export default function TasbihList() {
-  const [items, setItems] = useState(initialAzkaar);
-
-  const increment = (id) => {
-    setItems(items.map(it => it.id === id ? { ...it, count: it.count + 1 } : it));
-  };
-
-  const decrement = (id) => {
-    setItems(items.map(it => it.id === id && it.count > 0 ? { ...it, count: it.count - 1 } : it));
-  };
-
+export default function TasbihList({ items, increment, decrement }) {
   return (
     <View style={styles.tasbihContainer}>
       <Text style={styles.teacherHeading}>Tasbih Counter</Text>
